@@ -3,6 +3,8 @@ package com.codedotorg;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.TextInputDialog;
+import java.util.Optional;
 
 public class PetSelectionScene extends PetApp {
 
@@ -16,11 +18,11 @@ public class PetSelectionScene extends PetApp {
      * This class represents a scene for selecting a pet. It extends the Scene class and
      * provides a constructor for initializing the pet name and type.
      */
-    public PetSelectionScene(Stage window, int width, int height) {
+    public PetSelectionScene(Stage window, int width, int height, String petName, String petType) {
         super(window, width, height);
 
-        petName = "";
-        petType = "";
+        this.petName = petName;
+        this.petType = petType;
     }
 
     /**
@@ -36,7 +38,13 @@ public class PetSelectionScene extends PetApp {
      * Sets petName to the name entered by the user
      */
     public void setPetName() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Pet Name");
+        dialog.setHeaderText("Enter your pet's name:");
+        dialog.setContentText("Name:");
 
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(name -> this.petName = name);
         
 
     }
